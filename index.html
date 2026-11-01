@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ARCHIMEDES FEEDBACK</title>
+<style>
+:root{--navy:#0a2a5e;--cy:#16a5d8;--sky:#e6f4fc;--gold:#d9a441;--rose:#e0577f;--ink:#12305f;--mut:#5b7596;--bg:#f4f9fd;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
+.bgw{position:fixed;inset:auto 0 0 0;height:38vh;z-index:0;pointer-events:none;opacity:.55}
+.bgw svg{width:200%;height:100%;animation:drift 18s linear infinite}
+@keyframes drift{to{transform:translateX(-50%)}}
+.grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(22,165,216,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(22,165,216,.06) 1px,transparent 1px);background-size:44px 44px}
+main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:22px 18px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;letter-spacing:.18em;color:var(--mut);font-weight:600}
+.btn{font:inherit;cursor:pointer;border:1.5px solid var(--navy);background:#fff;color:var(--navy);padding:10px 18px;border-radius:999px;font-weight:600;transition:.2s}
+.btn:hover{background:var(--navy);color:#fff;transform:translateY(-2px)}
+.btn.pri{background:var(--navy);color:#fff;padding:15px 34px;font-size:16px;letter-spacing:.08em;box-shadow:0 10px 26px rgba(10,42,94,.25)}
+.btn.pri:hover{background:var(--cy);border-color:var(--cy)}
+.screen{display:none;animation:in .5s ease}.screen.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1}}
+.hero{text-align:center;padding:5vh 0 2vh}
+.hero .ship{width:min(360px,80%);margin:0 auto}
+h1{font-size:clamp(30px,7vw,64px);margin:6px 0 6px;letter-spacing:.06em;color:var(--navy);font-weight:800}
+h1 span{color:var(--cy)}
+.sub{font-size:clamp(17px,3vw,24px);color:var(--ink);margin:6px 0 16px}
+.note{color:var(--mut);max-width:440px;margin:0 auto 26px;line-height:1.6;border-left:3px solid var(--gold);padding-left:14px;text-align:left}
+.vec{display:inline-block;font-weight:700;margin:0 8px;color:var(--cy)}.vec.g{color:var(--rose)}
+h2{font-size:clamp(20px,4vw,30px);text-align:center;margin:20px 0 22px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.card{--c:var(--cy);background:rgba(255,255,255,.92);border:1px solid #d4e6f3;border-top:5px solid var(--c);border-radius:18px;padding:20px 18px;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:.25s;box-shadow:0 6px 20px rgba(10,42,94,.07);min-height:220px;display:flex;flex-direction:column;gap:8px}
+.card:hover,.card:focus-visible{transform:translateY(-8px);box-shadow:0 18px 38px rgba(10,42,94,.17);outline:none}
+.card:active{transform:scale(.97)}
+.card .n{font-size:12px;letter-spacing:.2em;color:var(--c);font-weight:800}
+.card .ic{font-size:28px}.card b{font-size:20px;letter-spacing:.05em;color:var(--navy)}
+.card i{font-style:normal;font-weight:600;font-size:15px}.card p{margin:0;font-size:13px;color:var(--mut);line-height:1.5}
+.scene{background:#fff;border:1px solid #d4e6f3;border-radius:22px;overflow:hidden;box-shadow:0 10px 30px rgba(10,42,94,.1)}
+.scene svg{display:block;width:100%;height:auto}
+#ship{transition:transform 1.6s cubic-bezier(.3,.8,.3,1),opacity 1.6s}
+.bob{animation:bob 3s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-5px)}}
+.ov{opacity:0;transition:opacity .9s .4s}
+svg[data-m=a] .m-a,svg[data-m=r] .m-r,svg[data-m=e] .m-e,svg[data-m=u] .m-u,svg[data-m=s] .m-s,svg[data-m=a] .m-ae,svg[data-m=e] .m-ae{opacity:1}
+svg[data-m=a] #ship{transform:translateY(-42px)}
+svg[data-m=u] #ship{transform:translateY(62px);opacity:.55}
+svg[data-m=e] #ship{transform:translateY(-8px)}
+.ring{transform-origin:300px 150px;animation:ring 2.6s ease-out infinite;fill:none;stroke:var(--rose);stroke-width:2}
+@keyframes ring{from{transform:scale(.2);opacity:.9}to{transform:scale(2.6);opacity:0}}
+.wv{animation:wv 6s linear infinite}@keyframes wv{to{transform:translateX(-120px)}}
+.res{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-top:18px}
+@media(max-width:760px){.res{grid-template-columns:1fr}}
+.panel{background:rgba(255,255,255,.95);border:1px solid #d4e6f3;border-radius:20px;padding:22px}
+.kick{font-size:12px;letter-spacing:.22em;color:var(--mut);font-weight:700}
+.rname{font-size:clamp(30px,6vw,48px);font-weight:800;margin:4px 0;color:var(--c,var(--navy));letter-spacing:.04em}
+.lvl{display:inline-block;padding:5px 12px;border-radius:999px;background:var(--sky);font-weight:700;font-size:13px;letter-spacing:.08em}
+.panel p{line-height:1.6;margin:12px 0}
+.next{border-left:4px solid var(--gold);background:#fffaf0;padding:12px 14px;border-radius:0 12px 12px 0;margin-top:10px}
+.next b{font-size:12px;letter-spacing:.2em;color:#a87a1d;display:block;margin-bottom:4px}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.chip{font:inherit;cursor:pointer;border:1.5px solid #bcd6e8;background:#fff;border-radius:999px;padding:9px 15px;font-size:14px;color:var(--ink);transition:.2s}
+.chip:hover{border-color:var(--cy);transform:translateY(-2px)}.chip.sel{background:var(--cy);border-color:var(--cy);color:#fff}
+.status{margin-top:18px;background:var(--navy);color:#fff;border-radius:20px;padding:20px 22px}
+.status h3{margin:0 0 12px;font-size:20px;letter-spacing:.14em}
+.steps{display:flex;gap:6px}.steps div{flex:1;height:8px;border-radius:6px;background:rgba(255,255,255,.2)}.steps div.on{background:var(--gold)}
+.status small{display:block;margin-top:10px;opacity:.85}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+#teacher{position:fixed;inset:0;z-index:10;background:rgba(10,42,94,.45);display:none;align-items:center;justify-content:center;padding:16px}
+#teacher.on{display:flex}
+.tbox{background:#fff;border-radius:22px;max-width:560px;width:100%;max-height:92vh;overflow:auto;padding:24px}
+.tbox h3{margin:0 0 4px;letter-spacing:.14em;font-size:22px}
+.row{display:grid;grid-template-columns:130px 1fr 28px;gap:10px;align-items:center;margin:10px 0;font-size:14px}
+.bar{height:14px;background:var(--sky);border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;width:0;border-radius:8px;transition:width .8s}
+.signal{margin:16px 0;padding:14px 16px;border-radius:14px;background:var(--sky);border-left:4px solid var(--cy);line-height:1.55}
+.signal b{display:block;font-size:12px;letter-spacing:.2em;margin-bottom:4px}
+.small{font-size:13px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<div class="bgw"><svg viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0 60Q150 20 300 60T600 60T900 60T1200 60V200H0Z" fill="#bfe3f5"/><path d="M0 100Q150 60 300 100T600 100T900 100T1200 100V200H0Z" fill="#8fd0ee" opacity=".7"/></svg></div>
+<main>
+<div class="top"><span>PHYSICS CONTROL ROOM</span><button class="btn" id="tbtn" style="padding:7px 14px;font-size:12px;letter-spacing:.1em">TEACHER VIEW</button></div>
+
+<section class="screen on" id="s1">
+ <div class="hero">
+  <svg class="ship" viewBox="0 0 360 200" aria-hidden="true">
+   <g class="bob"><path d="M95 120h170l-24 34H119z" fill="#0a2a5e"/><path d="M180 40v76M180 44l52 60h-52z" stroke="#0a2a5e" stroke-width="3" fill="#e6f4fc"/><path d="M180 60l-40 44h40z" fill="#16a5d8"/>
+   <path d="M180 154v34" stroke="#16a5d8" stroke-width="3"/><path d="M174 180l6 10 6-10" fill="#16a5d8"/><path d="M60 100V60" stroke="#e0577f" stroke-width="3"/><path d="M54 68l6-10 6 10" fill="#e0577f"/></g>
+   <text x="30" y="82" fill="#16a5d8" font-size="20" font-weight="700">F<tspan dy="5" font-size="13">A</tspan></text>
+   <path d="M300 100v40" stroke="#e0577f" stroke-width="3"/><path d="M294 132l6 10 6-10" fill="#e0577f"/><text x="310" y="124" fill="#e0577f" font-size="20" font-weight="700">F<tspan dy="5" font-size="13">g</tspan></text>
+   <path d="M0 160q30-14 60 0t60 0 60 0 60 0 60 0 60 0V200H0z" fill="#8fd0ee" opacity=".75"/>
+  </svg>
+  <h1>⚓ ARCHIMEDES <span>FEEDBACK</span></h1>
+  <div class="sub">«Бүгінгі сабақтан кейін сен қай деңгейдесің?»</div>
+  <div class="note">Дұрыс немесе бұрыс жауап жоқ.<br>Өзіңнің нақты түсіну деңгейіңді таңда.</div>
+  <button class="btn pri" id="start">MISSION START</button>
+  <div style="margin-top:18px;font-size:14px;color:var(--mut)">Архимед күші. Денелердің жүзу шарттары</div>
+ </div>
+</section>
+
+<section class="screen" id="s2">
+ <h2>Бүгінгі физикалық күйің қандай?</h2>
+ <div class="cards" id="cards"></div>
+</section>
+
+<section class="screen" id="s3">
+ <div class="scene">
+ <svg id="scn" data-m="a" viewBox="0 0 600 270" role="img" aria-label="Су және кеме анимациясы">
+  <rect width="600" height="270" fill="#f7fbfe"/>
+  <g class="ov m-e" stroke="#16a5d8" stroke-width=".6" opacity=".35"><path d="M0 40H600M0 80H600M0 120H600M0 160H600M0 200H600M0 240H600M60 0V270M120 0V270M180 0V270M240 0V270M300 0V270M360 0V270M420 0V270M480 0V270M540 0V270"/></g>
+  <g class="ov m-e" fill="#0a2a5e" font-size="15" font-weight="600"><text x="30" y="40">F<tspan dy="4" font-size="10">A</tspan> = ρ·g·V</text><text x="30" y="64">F<tspan dy="4" font-size="10">A</tspan> &gt; F<tspan dy="4" font-size="10">g</tspan> → қалқиды</text><text x="410" y="40">F<tspan dy="4" font-size="10">A</tspan> = F<tspan dy="4" font-size="10">g</tspan> → жүзеді</text><text x="410" y="64">F<tspan dy="4" font-size="10">A</tspan> &lt; F<tspan dy="4" font-size="10">g</tspan> → батады</text></g>
+  <g class="ov m-s"><circle class="ring" cx="300" cy="150" r="40"/><circle class="ring" cx="300" cy="150" r="40" style="animation-delay:.9s"/><circle class="ring" cx="300" cy="150" r="40" style="animation-delay:1.8s"/></g>
+  <g id="ship"><g class="bob"><path d="M235 140h130l-20 30H255z" fill="#0a2a5e"/><path d="M300 70v68M300 74l42 50h-42z" stroke="#0a2a5e" stroke-width="3" fill="#e6f4fc"/><path d="M300 90l-34 34h34z" fill="#16a5d8"/>
+   <g class="ov m-ae"><path d="M300 138V84" stroke="#16a5d8" stroke-width="4"/><path d="M293 92l7-14 7 14" fill="#16a5d8"/><text x="312" y="92" fill="#16a5d8" font-size="18" font-weight="700">F<tspan dy="4" font-size="12">A</tspan></text>
+   <path d="M300 160v52" stroke="#e0577f" stroke-width="4"/><path d="M293 204l7 14 7-14" fill="#e0577f"/><text x="312" y="206" fill="#e0577f" font-size="18" font-weight="700">F<tspan dy="4" font-size="12">g</tspan></text></g></g></g>
+  <g class="wv"><path d="M-120 150q30-16 60 0t60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0V270H-120z" fill="#8fd0ee" opacity=".62"/></g>
+  <g class="wv" style="animation-duration:9s"><path d="M-120 168q30-14 60 0t60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0 60 0V270H-120z" fill="#16a5d8" opacity=".35"/></g>
+  <g class="ov m-r"><circle cx="440" cy="210" r="24" fill="#0a2a5e"/><circle cx="440" cy="210" r="55" fill="rgba(255,255,255,.35)" stroke="#d9a441" stroke-width="5"/><path d="M480 250l38 12" stroke="#d9a441" stroke-width="8" stroke-linecap="round"/><text x="150" y="230" fill="#0a2a5e" font-size="14" font-weight="600">ығыстырылған көлем → F<tspan dy="4" font-size="10">A</tspan></text></g>
+  <g class="ov m-u"><rect x="70" y="30" width="190" height="34" rx="17" fill="#fff" stroke="#d9a441" stroke-width="2"/><text x="165" y="52" text-anchor="middle" fill="#a87a1d" font-size="14" font-weight="700">↻ қайта қарау керек</text></g>
+  <g class="ov m-a"><rect x="190" y="18" width="220" height="38" rx="8" fill="#0a2a5e"/><text x="300" y="43" text-anchor="middle" fill="#d9a441" font-size="17" font-weight="800" letter-spacing="3">MISSION COMPLETE</text></g>
+  <g class="ov m-s"><rect x="150" y="20" width="300" height="34" rx="17" fill="#fff" stroke="#e0577f" stroke-width="1.5"/><text x="300" y="42" text-anchor="middle" fill="#a8365a" font-size="13" font-weight="600">Бұл жауап — көмек қажет екенін көрсететін сигнал</text></g>
+ </svg></div>
+ <div class="res">
+  <div class="panel" id="rp">
+   <div class="kick">СЕНІҢ БҮГІНГІ ФИЗИКАЛЫҚ КҮЙІҢ</div>
+   <div class="rname" id="rname"></div><span class="lvl" id="rlvl"></span>
+   <p><b>Бүгін сен:</b><br><span id="rtxt"></span></p>
+   <div class="next"><b>NEXT MISSION</b><span id="rnext"></span></div>
+  </div>
+  <div class="panel">
+   <div class="kick">ҚОСЫМША · МІНДЕТТІ ЕМЕС</div>
+   <p style="margin-top:8px"><b>Саған сабақтың қай бөлігі көбірек көмектесті?</b></p>
+   <div class="chips" id="chips"></div>
+  </div>
+ </div>
+ <div class="status"><h3>⚓ MISSION STATUS</h3><div class="steps" id="steps"></div><small id="stat"></small></div>
+ <div class="actions"><button class="btn" id="redo">↺ Қайта таңдау</button><button class="btn" id="t2">CLASS FEEDBACK</button></div>
+</section>
+</main>
+
+<div id="teacher"><div class="tbox">
+ <h3>CLASS FEEDBACK</h3><div class="small" id="ttot"></div>
+ <div id="rows"></div>
+ <div class="signal"><b>CLASS SIGNAL</b><span id="sig"></span></div>
+ <div class="small" id="help"></div>
+ <p class="small">Деректер тек осы құрылғының браузерінде сақталады, серверге жіберілмейді.</p>
+ <div class="actions" style="margin-top:8px"><button class="btn" id="demo">Демо деректер</button><button class="btn" id="clr">Тазалау</button><button class="btn pri" id="tc" style="padding:10px 24px;font-size:14px">Жабу</button></div>
+</div></div>
+
+<script>
+const L=[
+{k:'a',n:'01',ic:'🏆',t:'АРХИМЕД',s:'Мен түсіндім',c:'#d9a441',lv:'ЖОҒАРЫ',d:'Архимед күшінің не екенін, оның неге тәуелді екенін және денелердің жүзу шарттарын түсіндіре аламын.',tx:'Архимед күшінің мәнін түсініп қана қоймай, оны түсіндіре алатын деңгейдесің.',nx:'Келесі қадам — күрделі есептерде білімді қолдану.',st:'Миссия орындалды: сен басқаларға да түсіндіре аласың.'},
+{k:'r',n:'02',ic:'🔬',t:'ЗЕРТТЕУШІ',s:'Негізін түсіндім',c:'#16a5d8',lv:'ЖАҚСЫ',d:'Негізгі ұғымдарды түсіндім, бірақ кейбір сұрақтарды тағы да бекітуім керек.',tx:'Сен дұрыс бағыттасың. Негізгі ұғымдар қалыптасты, енді оларды бекіту қалды.',nx:'Сен дұрыс бағыттасың. Енді білімді есеп арқылы бекіт.',st:'Зерттеу жалғасып жатыр: негіз дайын.'},
+{k:'e',n:'03',ic:'⚙️',t:'ИНЖЕНЕР',s:'Формуланы білемін, қолдану керек',c:'#2f6fd0',lv:'ОРТА',d:'Архимед күшінің формуласын білемін, бірақ есептерде қолдану кезінде әлі де жаттығу қажет.',tx:'Формуланы білесің — енді оны есептерде жұмыс істетуді үйрену керек.',nx:'Келесі миссия: F_A мен F_g-ді салыстырып көр.',st:'Конструкция дайын: қолдану жаттығуы керек.'},
+{k:'u',n:'04',ic:'🌊',t:'СУ АСТЫНДА',s:'Кей жерлері түсініксіз',c:'#4a8fb5',lv:'БЕКІТУ КЕРЕК',d:'Тақырыптың кейбір бөліктерін түсіндім, бірақ маңызды ұғымдар әлі толық қалыптасқан жоқ.',tx:'Тақырыптың бір бөлігі анық, ал кейбір ұғымдар әлі толық қалыптасып жатыр — бұл қалыпты кезең.',nx:'Қайта қара: ығыстырылған сұйық көлемі → Архимед күші → дененің күйі.',st:'Терең суға түсу — тақырыпты тереңірек түсінудің бастамасы.'},
+{k:'s',n:'05',ic:'🆘',t:'SOS',s:'Маған қайта түсіндіру қажет',c:'#e0577f',lv:'ҚОСЫМША ҚОЛДАУ',d:'Архимед күші немесе денелердің жүзу шарттары бойынша қосымша түсіндіру қажет.',tx:'Көмек сұрау — зерттеушінің күшті жағы. Сигнал мұғалімге жетті.',nx:'Мұғаліммен бірге тақырыпты қысқа мысал арқылы қайта өтіңдер.',st:'Сигнал қабылданды: бірге жол табамыз.'}];
+const H=['Формула','Тәжірибе/мысал','Топтық тапсырма','Инженерлік тапсырма','Есеп шығару'];
+const KEY='archimedes-feedback-v1';
+let D={a:0,r:0,e:0,u:0,s:0,h:[0,0,0,0,0]},mem=null,cur=null,hsel=-1;
+function load(){try{const v=JSON.parse(localStorage.getItem(KEY));if(v&&v.h)D=v}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}}
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));window.scrollTo({top:0,behavior:'smooth'})}
+load();
+$('cards').innerHTML=L.map(x=>`<button class="card" style="--c:${x.c}" data-k="${x.k}"><span class="n">${x.n}</span><span class="ic">${x.ic}</span><b>${x.t}</b><i>«${x.s}»</i><p>${x.d}</p></button>`).join('');
+$('chips').innerHTML=H.map((h,i)=>`<button class="chip" data-i="${i}">${h}</button>`).join('');
+$('start').onclick=()=>show('s2');
+$('cards').onclick=e=>{const b=e.target.closest('.card');if(!b)return;choose(b.dataset.k)};
+function choose(k){
+ const x=L.find(q=>q.k===k);
+ if(cur)D[cur]=Math.max(0,D[cur]-1);
+ D[k]++;cur=k;hsel=-1;save();
+ const sv=$('scn');sv.setAttribute('data-m','');show('s3');
+ setTimeout(()=>sv.setAttribute('data-m',k),120);
+ $('rp').style.setProperty('--c',x.c);
+ $('rname').textContent=x.ic+' '+x.t;$('rlvl').textContent='Түсіну деңгейі: '+x.lv;
+ $('rtxt').textContent='«'+x.tx+'»';$('rnext').textContent='«'+x.nx.replace('F_A','Fₐ').replace('F_g','F_g')+'»';
+ document.querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));
+ $('steps').innerHTML=L.map(q=>`<div class="${L.indexOf(q)<=L.indexOf(x)?'on':''}"></div>`).join('');
+ $('stat').textContent=x.n+' / 05 · '+x.t+' — '+x.st;
+ renderT();
+}
+$('chips').onclick=e=>{const c=e.target.closest('.chip');if(!c)return;const i=+c.dataset.i;
+ if(hsel>=0)D.h[hsel]=Math.max(0,D.h[hsel]-1);
+ if(hsel===i){hsel=-1;c.classList.remove('sel')}else{hsel=i;D.h[i]++;document.querySelectorAll('.chip').forEach(q=>q.classList.toggle('sel',q===c))}
+ save();renderT()};
+$('redo').onclick=()=>{if(cur){D[cur]=Math.max(0,D[cur]-1);cur=null}
+ if(hsel>=0){D.h[hsel]=Math.max(0,D.h[hsel]-1);hsel=-1}
+ save();renderT();show('s2')};
+function signal(n){
+ if(!n)return'Әзірге жауап жоқ. Оқушылар таңдау жасағаннан кейін қорытынды осы жерде шығады.';
+ const p=k=>D[k]/n;
+ if(p('s')+p('u')>=.4)return'Сыныптың едәуір бөлігіне Архимед күші мен жүзу шарттарын қайта түсіндіру қажет. Келесі сабақты қысқа қайталаудан бастаған дұрыс.';
+ if(p('u')>=.25)return'Сыныптың негізгі қиындығы — денелердің жүзу шарттарын қолдану. F_A мен F_g салыстыруына көбірек мысал қажет.'.replace('F_A','Fₐ');
+ if(p('e')>=.3)return'Оқушылар формуланы біледі, бірақ есептерде қолдануда қиналады. Келесі сабақта есеп шығару жаттығуын көбейту ұсынылады.';
+ if(p('a')+p('r')>=.6)return'Сыныптың көпшілігі тақырыпты түсінген. Алайда '+((D.s+D.u)?'бірнеше оқушыға Архимед күшін есептеуде қосымша қолдау қажет.':'келесі сабақта күрделі есептерге көшуге болады.');
+ return'Сынып деңгейі әртүрлі: тақырыпты жұптық және топтық жұмыспен бекіту тиімді.';
+}
+function renderT(){
+ const n=L.reduce((s,q)=>s+D[q.k],0);
+ $('ttot').textContent='Барлығы '+n+' оқушы жауап берді';
+ const mx=Math.max(1,...L.map(q=>D[q.k]));
+ $('rows').innerHTML=L.map(q=>`<div class="row"><span>${q.ic} ${q.t}</span><div class="bar"><i style="width:${D[q.k]/mx*100}%;background:${q.c}"></i></div><b>${D[q.k]}</b></div>`).join('');
+ $('sig').textContent=signal(n);
+ const t=D.h.reduce((a,b)=>a+b,0);
+ $('help').textContent=t?'Ең көп көмектескен: '+H[D.h.indexOf(Math.max(...D.h))]+' ('+Math.max(...D.h)+' дауыс)':'Сабақтың пайдалы бөлігі бойынша жауап әзірге жоқ.';
+}
+const T=$('teacher');
+function openT(){renderT();T.classList.add('on')}
+$('tbtn').onclick=openT;$('t2').onclick=openT;$('tc').onclick=()=>T.classList.remove('on');
+T.onclick=e=>{if(e.target===T)T.classList.remove('on')};
+$('demo').onclick=()=>{D={a:8,r:5,e:6,u:3,s:1,h:[4,5,6,3,5]};cur=null;hsel=-1;save();renderT()};
+$('clr').onclick=()=>{D={a:0,r:0,e:0,u:0,s:0,h:[0,0,0,0,0]};cur=null;hsel=-1;save();renderT()};
+renderT();
+</script>
+</body>
+</html>
